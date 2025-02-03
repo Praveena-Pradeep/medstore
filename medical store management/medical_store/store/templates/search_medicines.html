@@ -1,0 +1,19 @@
+<input type="text" id="search" placeholder="Search medicines..." />
+<ul id="search-results"></ul>
+
+<script>
+    document.getElementById('search').addEventListener('input', function() {
+        fetch(`/search/?query=${this.value}`)
+            .then(response => response.json())
+            .then(data => {
+                const results = data.results;
+                const resultsList = document.getElementById('search-results');
+                resultsList.innerHTML = '';
+                results.forEach(medicine => {
+                    const li = document.createElement('li');
+                    li.textContent = medicine.name;
+                    resultsList.appendChild(li);
+                });
+            });
+    });
+</script>

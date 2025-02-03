@@ -1,0 +1,24 @@
+<h2>Your Medicines</h2>
+
+  <ul>
+     {% for medicine in page_obj %}
+        <li>{{ medicine.name }} - <a href="{% url 'edit_medicine' medicine.id %}">Edit</a> | <a href="{% url 'delete_medicine' medicine.id %}">Delete</a></li>
+    {% empty %}
+        <li>No medicines added yet.</li>
+    {% endfor %}
+</ul>
+
+<div>
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    <div>
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </div>
+</div>
