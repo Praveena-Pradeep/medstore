@@ -1,0 +1,10 @@
+{%extends 'layout/app-layout.html' %}
+{%block 'content'%}
+<h2>Delete Medicine</h2>
+<p>Are you sure you want to delete "{{ medicine.name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+</form>
+<a href="{% url 'medicine_list' %}">Cancel</a>
+{%endblock%}

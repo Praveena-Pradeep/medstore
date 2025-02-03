@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Medical Store Management</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Medical Store Management</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'signup' %}">Signup</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="form-section">
+        <h1>Create Your Account</h1>
+        <form method="POST" class="signup-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="submit-btn">Sign Up</button>
+        </form>
+
+    </section>
+    <footer>
+        <p>&copy; 2025 Medical Store Management</p>
+    </footer>
+</body>
+</html>

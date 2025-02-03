@@ -1,0 +1,67 @@
+{% extends 'layout/app-layout.html' %}
+
+{% block 'content' %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<h2>Your Medicines</h2>
+
+<!-- Debug: Show total medicines -->
+<p>Total medicines: {{ medicines|length }}</p>
+<div align="center">
+<table class="table boardered">
+    <thead>
+        <tr>
+            <th>Added by</th>
+            <th>Name</th>
+            <th>Available Stock</th>
+            <th>Added on</th>
+            <th>Actions</th>
+       
+        </tr>
+    </thead>
+    <tbody>
+        {% for medicine in medicines %}
+            <tr>
+                <td>{{ medicine.user.username}}</td>
+                <td>{{ medicine.name }}</td>
+                <td>{{ medicine.stock }}</td>
+                <td>{{ medicine.added_time|date:"D d M Y H:i" }}</td>
+              
+                <td>
+                    <a href="{% url 'edit_medicine' medicine.id %}"><button>Edit</button></a>
+                    <a href="{% url 'delete_medicine' medicine.id %}"><button>Delete</button></a>
+                </td>
+            
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">No medicines available.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+<nav aria-label="Page navigation example">
+    {% if page_obj.has_previous %}
+        <a href="?page=1" class="page-link">&laquo; First</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Previous</a>
+    {% endif %}
+    
+    {% for page_number in page_obj.paginator.page_range %}
+        {% if page_number == page_obj.number %}
+            <span class="page-link" style="font-weight: bold;">{{ page_number }}</span>
+        {% else %}
+            <a href="?page={{ page_number }}" class="page-link">{{ page_number }}</a>
+        {% endif %}
+    {% endfor %}
+    
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next &raquo;</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">Last &raquo;</a>
+    {% endif %}
+</nav>
+
+
+
+
+{% endblock %}  

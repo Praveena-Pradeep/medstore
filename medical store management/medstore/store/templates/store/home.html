@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Store Management</title>
+    {% load static %}  <!-- Load static files -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Medical Store Management</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'signup' %}">Signup</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+        </ul>
+    </nav>
+    
+    <footer>
+        <p>&copy; 2025 Medical Store Management</p>
+    </footer>
+</body>
+</html>
